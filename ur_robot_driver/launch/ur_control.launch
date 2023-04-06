@@ -3,7 +3,8 @@
 
   <!-- GDB functionality -->
   <arg name="debug" default="false" doc="If set to true, will start the driver inside gdb" />
-  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+  <!-- Set process nice for hardware interface to ensure stable operation when not using RT kernel -->
+  <arg unless="$(arg debug)" name="launch_prefix" value="nice -n -15" />
   <arg     if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args" />
 
   <arg name="use_tool_communication" doc="On e-Series robots tool communication can be enabled with this argument"/>
